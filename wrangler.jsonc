@@ -1,0 +1,25 @@
+{
+    "$schema": "./node_modules/wrangler/config-schema.json",
+    "name": "nyungwe-nexus",
+    "main": "worker/index.ts",
+    "compatibility_date": "2026-09-01",
+    "assets": {
+        "directory": "./dist",
+        "binding": "ASSETS",
+        "not_found_handling": "single-page-application",
+        "run_worker_first": ["/", "/api/*"]
+    },
+    "d1_databases": [
+        {
+            "binding": "DB",
+            "database_name": "nyungwe-nexus-db",
+            "database_id": "b5467dbe-9134-46ae-8366-63ea1631f57f",
+            "migrations_dir": "./migrations"
+        }
+    ],
+    "observability": {
+        "enabled": true,
+        "logs": { "enabled": true, "head_sampling_rate": 1 },
+        "traces": { "enabled": true, "head_sampling_rate": 0.1 }
+    }
+}
