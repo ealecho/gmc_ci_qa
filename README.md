@@ -2,6 +2,8 @@
 
 Nyungwe Nexus is a privacy-conscious cloud dashboard for exploring how livelihood support may relate to conservation pressure around Nyungwe National Park. It models the three-arm, 1,800-participant study described by 100WEEKS, African Parks, and Wageningen University & Research.
 
+**Study source:** https://100weeks.org/updates/a-large-scale-study-in-nyungwe-national-park-can-poverty-reduction-contribute-to-nature-conservation
+
 **Live application:** https://nyungwe-nexus.alaara.workers.dev
 
 > All records and outcomes in this repository are synthetic demonstration data. They are not findings from the live Nyungwe study.
