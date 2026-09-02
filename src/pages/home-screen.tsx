@@ -51,6 +51,12 @@ const armShortNames: Record<Outcome["arm"], string> = { cash_plus: "Cash + progr
 const formatRwf = new Intl.NumberFormat("en-RW", { style: "currency", currency: "RWF", maximumFractionDigits: 0 });
 const number = (value: unknown) => Number(value ?? 0);
 
+const fetchDashboard = async (signal?: AbortSignal): Promise<DashboardData> => {
+    const response = await fetch("/api/dashboard", { headers: { Accept: "application/json" }, signal });
+    if (!response.ok) throw new Error("The dashboard API is not available.");
+    return response.json();
+};
+
 function MetricCard({ label, value, helper, icon: Icon }: { label: string; value: string; helper: string; icon: typeof Users01 }) {
     return (
         <article className="rounded-xl bg-primary p-5 shadow-xs ring-1 ring-secondary ring-inset">
@@ -89,9 +95,7 @@ export const HomeScreen = () => {
 
     const loadDashboard = async () => {
         try {
-            const response = await fetch("/api/dashboard", { headers: { Accept: "application/json" } });
-            if (!response.ok) throw new Error("The dashboard API is not available.");
-            setData(await response.json());
+            setData(await fetchDashboard());
             setError("");
         } catch (reason) {
             setError(reason instanceof Error ? reason.message : "Unable to load the dashboard.");
@@ -99,7 +103,17 @@ export const HomeScreen = () => {
     };
 
     useEffect(() => {
-        void loadDashboard();
+        const controller = new AbortController();
+        void fetchDashboard(controller.signal)
+            .then((result) => {
+                setData(result);
+                setError("");
+            })
+            .catch((reason: unknown) => {
+                if (reason instanceof DOMException && reason.name === "AbortError") return;
+                setError(reason instanceof Error ? reason.message : "Unable to load the dashboard.");
+            });
+        return () => controller.abort();
     }, []);
 
     const outcomes = useMemo(
