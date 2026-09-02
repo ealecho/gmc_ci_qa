@@ -11,9 +11,10 @@
         "db:migrate:local": "wrangler d1 migrations apply nyungwe-nexus-db --local",
         "db:migrate:remote": "wrangler d1 migrations apply nyungwe-nexus-db --remote",
         "types": "wrangler types",
+        "lint": "eslint . --max-warnings 0",
         "typecheck": "tsc -b && tsc -p tsconfig.worker.json --noEmit",
         "test": "vitest run",
-        "check": "npm run typecheck && npm test && npm run build && wrangler deploy --dry-run",
+        "check": "npm run lint && npm run typecheck && npm test && npm run build && wrangler deploy --dry-run",
         "deploy": "npm run build && wrangler deploy"
     },
     "dependencies": {
@@ -30,14 +31,19 @@
         "tailwindcss-react-aria-components": "^2.0.1"
     },
     "devDependencies": {
+        "@eslint/js": "^10.0.1",
         "@trivago/prettier-plugin-sort-imports": "^6.0.2",
         "@types/node": "^25.5.0",
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
         "@vitejs/plugin-react": "^6.0.1",
+        "eslint": "^10.9.1",
+        "eslint-plugin-react-hooks": "^7.1.1",
+        "globals": "^17.12.0",
         "prettier": "^3.8.1",
         "prettier-plugin-tailwindcss": "^0.7.2",
         "typescript": "^5.9.3",
+        "typescript-eslint": "^8.69.0",
         "vite": "^8.0.2",
         "vitest": "^4.0.0",
         "wrangler": "^4.0.0"

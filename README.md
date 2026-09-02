@@ -45,6 +45,7 @@ Open `http://localhost:8787`. To run the frontend alone, use `npm run dev`; API-
 ## Verification
 
 ```bash
+npm run lint
 npm run typecheck
 npm test
 npm run build
@@ -67,6 +68,9 @@ GitHub Actions workflows are included for pull-request validation and main-branc
 
 - [Professional report](docs/report.md)
 - [10-minute presentation script](docs/demo-script.md)
+- [QA report](docs/qa-report.md)
+- [200–300-word reflection](docs/reflection.md)
+- [CI pipeline](.github/workflows/ci.yml)
 - [Initial database migration](migrations/0001_initial.sql)
 - [Worker API](worker/index.ts)
 
